@@ -1,14 +1,14 @@
 import yfinance as yf
 import pandas as pd
 import requests
+import os
 
 # Exemples d'actions PEA (Le suffixe .PA indique la Bourse de Paris)
 tickers = ["MC.PA", "AI.PA", "TTE.PA", "SAN.PA", "BNP.PA", "WAVE.PA"]
 
 def send_telegram_alert(message):
-    # Remplacer par vos identifiants obtenus via BotFather sur Telegram
-    bot_token = "VOTRE_TOKEN_BOT"
-    chat_id = "VOTRE_CHAT_ID"
+    bot_token = os.getenv("TELEGRAM_BOT_TOKEN")
+    chat_id = os.getenv("TELEGRAM_CHAT_ID")
     url = f"https://api.telegram.org/bot{bot_token}/sendMessage?chat_id={chat_id}&text={message}"
     requests.get(url)
 
@@ -41,7 +41,7 @@ def check_buy_signals():
     if alertes:
         message = "\n".join(alertes)
         print(message)
-        # send_telegram_alert(message) # Retirer le # pour activer Telegram
+        send_telegram_alert(message) # Retirer le # pour activer Telegram
     else:
         print("Aucun signal détecté aujourd'hui.")
 
