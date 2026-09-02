@@ -4,7 +4,22 @@ import requests
 import os
 
 # Exemples d'actions PEA (Le suffixe .PA indique la Bourse de Paris)
-tickers = ["MC.PA", "AI.PA", "TTE.PA", "SAN.PA", "BNP.PA", "WAVE.PA"]
+tickers = [
+    # Actions
+    "AI.PA",    # Air Liquide
+    "BNP.PA",   # BNP Paribas
+    "TTE.PA",   # TotalEnergies
+    "CS.PA",    # AXA
+    "MC.PA",    # LVMH 
+    "SAN.PA",   # Sanofi 
+    "WAVE.PA",  # Wavestone 
+    
+    # ETFs
+    "C40.PA",   # Amundi CAC 40 UCITS ETF
+    "CW8.PA",   # Amundi MSCI World UCITS ETF PEA
+    "MSE.PA",   # Amundi Euro Stoxx 50 UCITS ETF
+    "MEUD.PA"   # Amundi Stoxx Europe 600 UCITS ETF
+]
 
 def send_telegram_alert(message):
     bot_token = os.getenv("TELEGRAM_BOT_TOKEN")
@@ -41,7 +56,7 @@ def check_buy_signals():
     if alertes:
         message = "\n".join(alertes)
         print(message)
-        send_telegram_alert(message) # Retirer le # pour activer Telegram
+        send_telegram_alert(message)
     else:
         print("Aucun signal détecté aujourd'hui.")
         
