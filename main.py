@@ -44,6 +44,7 @@ def check_buy_signals():
         send_telegram_alert(message) # Retirer le # pour activer Telegram
     else:
         print("Aucun signal détecté aujourd'hui.")
+        send_telegram_alert("Test technique réussi : le bot est bien connecté.")
 
 if __name__ == "__main__":
     check_buy_signals()
